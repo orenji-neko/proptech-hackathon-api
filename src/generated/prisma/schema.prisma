@@ -36,7 +36,8 @@ model Customer {
 model Agent {
   userId Int @id @unique
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  properties Property[]
 }
 
 model Admin {
@@ -57,7 +58,7 @@ model Event {
 
   pubId Int
 
-  publisher Admin @relation(fields: [pubId], references: [userId])
+  publisher Admin? @relation(fields: [pubId], references: [userId], onUpdate: Cascade, onDelete: NoAction)
 }
 
 model Property {
@@ -67,9 +68,11 @@ model Property {
   price     Decimal
   imageName String // image file names
 
-  typeId Int
+  typeId  Int?
+  agentId Int?
 
-  type PropertyType @relation(fields: [typeId], references: [id])
+  agent Agent?        @relation(fields: [agentId], references: [userId], onUpdate: Cascade, onDelete: SetNull)
+  type  PropertyType? @relation(fields: [typeId], references: [id], onUpdate: Cascade, onDelete: SetNull)
 
   rentals Rent[]
 }
@@ -90,6 +93,6 @@ model Rent {
   propertyId Int
   tenantId   Int
 
-  property Property @relation(fields: [propertyId], references: [id])
-  tenant   Customer @relation(fields: [tenantId], references: [userId])
+  property Property @relation(fields: [propertyId], references: [id], onUpdate: Cascade, onDelete: NoAction)
+  tenant   Customer @relation(fields: [tenantId], references: [userId], onUpdate: Cascade, onDelete: NoAction)
 }

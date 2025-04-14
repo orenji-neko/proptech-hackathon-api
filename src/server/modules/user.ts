@@ -96,7 +96,7 @@ export default new Elysia({ name: "user", prefix: "/users" })
         bday: t.Date(),
         address: t.String(),
         gender: t.String(),
-        role: t.String(),
+        role: t.String({ examples: ["admin", "agent", "customer"] }),
       }),
     }
   )
@@ -138,7 +138,7 @@ export default new Elysia({ name: "user", prefix: "/users" })
         bday: t.Date(),
         address: t.String(),
         gender: t.String(),
-        role: t.String(),
+        role: t.String({ examples: ["admin", "agent", "customer"] }),
       }),
     }
   )
@@ -147,9 +147,9 @@ export default new Elysia({ name: "user", prefix: "/users" })
    * Gets a specific user based on the id.
    */
   .delete(
-    "/:id",
+    "/:userId",
     async ({ error, params, prisma }) => {
-      const id = parseInt(params.id);
+      const id = parseInt(params.userId);
 
       const user = await prisma.user.delete({
         where: {
@@ -184,6 +184,12 @@ export default new Elysia({ name: "user", prefix: "/users" })
       // if no user found
       if (!user) {
         throw error(404);
+      }
+
+      // password checking
+      const match = await Bun.password.verify(password, user.password, "bcrypt");
+      if (!match) {
+        throw error(400);
       }
 
       // generate token

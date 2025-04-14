@@ -11,8 +11,8 @@ datasource db {
 }
 
 model User {
-  id            Int         @id @default(autoincrement())
-  email         String      @unique
+  id            Int           @id @default(autoincrement())
+  email         String        @unique
   password      String
   lname         String
   fname         String
@@ -26,38 +26,39 @@ model User {
 }
 
 model Customer {
-  userId        Int         @id @unique
+  userId        Int           @id @unique
 
-  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   rented        Rent[]
 }
 
 model Agent {
-  userId        Int         @id @unique
+  userId        Int           @id @unique
 
-  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  properties    Property[]
 }
 
 model Admin {
-  userId        Int         @id @unique
+  userId        Int           @id @unique
 
-  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   events        Event[]
 }
 
 model Event {
-  id            Int         @id @default(autoincrement())
+  id            Int           @id @default(autoincrement())
   title         String 
   content       String
   address       String
   startAt       DateTime
-  image         String    // image file names
+  image         String        // image file names
 
   pubId         Int
 
-  publisher     Admin       @relation(fields: [pubId], references: [userId]) 
+  publisher     Admin?        @relation(fields: [pubId], references: [userId], onUpdate: Cascade, onDelete: NoAction)
 }
 
 model Property {
@@ -65,31 +66,33 @@ model Property {
   name          String    
   location      String
   price         Decimal
-  imageName     String      // image file names
+  imageName     String        // image file names
 
-  typeId        Int
+  typeId        Int?
+  agentId       Int?
 
-  type          PropertyType  @relation(fields: [typeId], references: [id])
+  agent         Agent?        @relation(fields: [agentId], references: [userId], onUpdate: Cascade, onDelete: SetNull)
+  type          PropertyType? @relation(fields: [typeId], references: [id], onUpdate: Cascade, onDelete: SetNull)
 
   rentals       Rent[]
 }
 
 model PropertyType {
-  id            Int         @id @default(autoincrement())
+  id            Int           @id @default(autoincrement())
   name          String
   properties    Property[]
 }
 
 model Rent {
-  id            Int         @id @default(autoincrement())     
+  id            Int           @id @default(autoincrement())     
   price         Decimal
-  rentedAt      DateTime    @default(now())
+  rentedAt      DateTime      @default(now())
   endAt         DateTime?
   paidAt        DateTime?
 
   propertyId    Int
   tenantId      Int
 
-  property      Property    @relation(fields: [propertyId], references: [id])
-  tenant        Customer    @relation(fields: [tenantId], references: [userId])
+  property      Property      @relation(fields: [propertyId], references: [id], onUpdate: Cascade, onDelete: NoAction)
+  tenant        Customer      @relation(fields: [tenantId], references: [userId], onUpdate: Cascade, onDelete: NoAction)
 }

@@ -9,33 +9,28 @@ export default new Elysia({ name: "property", prefix: "/properties" })
   /**
    * [GET] /properties
    */
-  .get(
-    "/",
-    async ({ prisma }) => {
-      const properties = await prisma.property.findMany({
-        include: {
-          type: true
-        }
-      });
-      return properties;
-    },
-  )
+  .get("/", async ({ prisma }) => {
+    const properties = await prisma.property.findMany({
+      include: {
+        type: true,
+      },
+    });
+    return properties;
+  })
   /**
    * [GET] /properties/types
    */
-  .get(
-    "/types",
-    async ({ prisma }) => {
-      const types = await prisma.propertyType.findMany();
-      return types;
-    },
-  )
+  .get("/types", async ({ prisma }) => {
+    const types = await prisma.propertyType.findMany();
+    return types;
+  })
   /**
    * [POST] /properties
+   * Add a property
    */
   .post(
     "/",
-    async ({ body, prisma, currentUser }) => {
+    async ({ error, body, prisma, currentUser }) => {
       const { name, location, price, imageName, typeId } = body;
 
       const property = await prisma.property.create({
@@ -49,6 +44,14 @@ export default new Elysia({ name: "property", prefix: "/properties" })
               id: typeId,
             },
           },
+          // if not agent, then it will remain undefined
+          agent: currentUser?.agent
+            ? {
+                connect: {
+                  userId: currentUser.agent.userId,
+                },
+              }
+            : undefined,
         },
       });
 
@@ -112,7 +115,7 @@ export default new Elysia({ name: "property", prefix: "/properties" })
 
     const user = await prisma.property.delete({
       where: {
-        id: id
-      }
+        id: id,
+      },
     });
   });

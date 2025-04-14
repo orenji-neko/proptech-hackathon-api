@@ -1533,6 +1533,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type AgentCountOutputType
+   */
+
+  export type AgentCountOutputType = {
+    properties: number
+  }
+
+  export type AgentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    properties?: boolean | AgentCountOutputTypeCountPropertiesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AgentCountOutputType without action
+   */
+  export type AgentCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AgentCountOutputType
+     */
+    select?: AgentCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AgentCountOutputType without action
+   */
+  export type AgentCountOutputTypeCountPropertiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PropertyWhereInput
+  }
+
+
+  /**
    * Count Type AdminCountOutputType
    */
 
@@ -4044,6 +4075,8 @@ export namespace Prisma {
   export type AgentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    properties?: boolean | Agent$propertiesArgs<ExtArgs>
+    _count?: boolean | AgentCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["agent"]>
 
   export type AgentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4063,6 +4096,8 @@ export namespace Prisma {
   export type AgentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId", ExtArgs["result"]["agent"]>
   export type AgentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    properties?: boolean | Agent$propertiesArgs<ExtArgs>
+    _count?: boolean | AgentCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AgentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -4075,6 +4110,7 @@ export namespace Prisma {
     name: "Agent"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      properties: Prisma.$PropertyPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       userId: number
@@ -4473,6 +4509,7 @@ export namespace Prisma {
   export interface Prisma__AgentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    properties<T extends Agent$propertiesArgs<ExtArgs> = {}>(args?: Subset<T, Agent$propertiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PropertyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4894,6 +4931,30 @@ export namespace Prisma {
      * Limit how many Agents to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Agent.properties
+   */
+  export type Agent$propertiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Property
+     */
+    select?: PropertySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Property
+     */
+    omit?: PropertyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PropertyInclude<ExtArgs> | null
+    where?: PropertyWhereInput
+    orderBy?: PropertyOrderByWithRelationInput | PropertyOrderByWithRelationInput[]
+    cursor?: PropertyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PropertyScalarFieldEnum | PropertyScalarFieldEnum[]
   }
 
   /**
@@ -6201,7 +6262,7 @@ export namespace Prisma {
     startAt?: boolean
     image?: boolean
     pubId?: boolean
-    publisher?: boolean | AdminDefaultArgs<ExtArgs>
+    publisher?: boolean | Event$publisherArgs<ExtArgs>
   }, ExtArgs["result"]["event"]>
 
   export type EventSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6212,7 +6273,7 @@ export namespace Prisma {
     startAt?: boolean
     image?: boolean
     pubId?: boolean
-    publisher?: boolean | AdminDefaultArgs<ExtArgs>
+    publisher?: boolean | Event$publisherArgs<ExtArgs>
   }, ExtArgs["result"]["event"]>
 
   export type EventSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6223,7 +6284,7 @@ export namespace Prisma {
     startAt?: boolean
     image?: boolean
     pubId?: boolean
-    publisher?: boolean | AdminDefaultArgs<ExtArgs>
+    publisher?: boolean | Event$publisherArgs<ExtArgs>
   }, ExtArgs["result"]["event"]>
 
   export type EventSelectScalar = {
@@ -6238,19 +6299,19 @@ export namespace Prisma {
 
   export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "address" | "startAt" | "image" | "pubId", ExtArgs["result"]["event"]>
   export type EventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    publisher?: boolean | AdminDefaultArgs<ExtArgs>
+    publisher?: boolean | Event$publisherArgs<ExtArgs>
   }
   export type EventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    publisher?: boolean | AdminDefaultArgs<ExtArgs>
+    publisher?: boolean | Event$publisherArgs<ExtArgs>
   }
   export type EventIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    publisher?: boolean | AdminDefaultArgs<ExtArgs>
+    publisher?: boolean | Event$publisherArgs<ExtArgs>
   }
 
   export type $EventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Event"
     objects: {
-      publisher: Prisma.$AdminPayload<ExtArgs>
+      publisher: Prisma.$AdminPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -6654,7 +6715,7 @@ export namespace Prisma {
    */
   export interface Prisma__EventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    publisher<T extends AdminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminDefaultArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    publisher<T extends Event$publisherArgs<ExtArgs> = {}>(args?: Subset<T, Event$publisherArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7085,6 +7146,25 @@ export namespace Prisma {
   }
 
   /**
+   * Event.publisher
+   */
+  export type Event$publisherArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admin
+     */
+    select?: AdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admin
+     */
+    omit?: AdminOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminInclude<ExtArgs> | null
+    where?: AdminWhereInput
+  }
+
+  /**
    * Event without action
    */
   export type EventDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7119,12 +7199,14 @@ export namespace Prisma {
     id: number | null
     price: Decimal | null
     typeId: number | null
+    agentId: number | null
   }
 
   export type PropertySumAggregateOutputType = {
     id: number | null
     price: Decimal | null
     typeId: number | null
+    agentId: number | null
   }
 
   export type PropertyMinAggregateOutputType = {
@@ -7134,6 +7216,7 @@ export namespace Prisma {
     price: Decimal | null
     imageName: string | null
     typeId: number | null
+    agentId: number | null
   }
 
   export type PropertyMaxAggregateOutputType = {
@@ -7143,6 +7226,7 @@ export namespace Prisma {
     price: Decimal | null
     imageName: string | null
     typeId: number | null
+    agentId: number | null
   }
 
   export type PropertyCountAggregateOutputType = {
@@ -7152,6 +7236,7 @@ export namespace Prisma {
     price: number
     imageName: number
     typeId: number
+    agentId: number
     _all: number
   }
 
@@ -7160,12 +7245,14 @@ export namespace Prisma {
     id?: true
     price?: true
     typeId?: true
+    agentId?: true
   }
 
   export type PropertySumAggregateInputType = {
     id?: true
     price?: true
     typeId?: true
+    agentId?: true
   }
 
   export type PropertyMinAggregateInputType = {
@@ -7175,6 +7262,7 @@ export namespace Prisma {
     price?: true
     imageName?: true
     typeId?: true
+    agentId?: true
   }
 
   export type PropertyMaxAggregateInputType = {
@@ -7184,6 +7272,7 @@ export namespace Prisma {
     price?: true
     imageName?: true
     typeId?: true
+    agentId?: true
   }
 
   export type PropertyCountAggregateInputType = {
@@ -7193,6 +7282,7 @@ export namespace Prisma {
     price?: true
     imageName?: true
     typeId?: true
+    agentId?: true
     _all?: true
   }
 
@@ -7288,7 +7378,8 @@ export namespace Prisma {
     location: string
     price: Decimal
     imageName: string
-    typeId: number
+    typeId: number | null
+    agentId: number | null
     _count: PropertyCountAggregateOutputType | null
     _avg: PropertyAvgAggregateOutputType | null
     _sum: PropertySumAggregateOutputType | null
@@ -7317,7 +7408,9 @@ export namespace Prisma {
     price?: boolean
     imageName?: boolean
     typeId?: boolean
-    type?: boolean | PropertyTypeDefaultArgs<ExtArgs>
+    agentId?: boolean
+    agent?: boolean | Property$agentArgs<ExtArgs>
+    type?: boolean | Property$typeArgs<ExtArgs>
     rentals?: boolean | Property$rentalsArgs<ExtArgs>
     _count?: boolean | PropertyCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["property"]>
@@ -7329,7 +7422,9 @@ export namespace Prisma {
     price?: boolean
     imageName?: boolean
     typeId?: boolean
-    type?: boolean | PropertyTypeDefaultArgs<ExtArgs>
+    agentId?: boolean
+    agent?: boolean | Property$agentArgs<ExtArgs>
+    type?: boolean | Property$typeArgs<ExtArgs>
   }, ExtArgs["result"]["property"]>
 
   export type PropertySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7339,7 +7434,9 @@ export namespace Prisma {
     price?: boolean
     imageName?: boolean
     typeId?: boolean
-    type?: boolean | PropertyTypeDefaultArgs<ExtArgs>
+    agentId?: boolean
+    agent?: boolean | Property$agentArgs<ExtArgs>
+    type?: boolean | Property$typeArgs<ExtArgs>
   }, ExtArgs["result"]["property"]>
 
   export type PropertySelectScalar = {
@@ -7349,25 +7446,30 @@ export namespace Prisma {
     price?: boolean
     imageName?: boolean
     typeId?: boolean
+    agentId?: boolean
   }
 
-  export type PropertyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "location" | "price" | "imageName" | "typeId", ExtArgs["result"]["property"]>
+  export type PropertyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "location" | "price" | "imageName" | "typeId" | "agentId", ExtArgs["result"]["property"]>
   export type PropertyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    type?: boolean | PropertyTypeDefaultArgs<ExtArgs>
+    agent?: boolean | Property$agentArgs<ExtArgs>
+    type?: boolean | Property$typeArgs<ExtArgs>
     rentals?: boolean | Property$rentalsArgs<ExtArgs>
     _count?: boolean | PropertyCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PropertyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    type?: boolean | PropertyTypeDefaultArgs<ExtArgs>
+    agent?: boolean | Property$agentArgs<ExtArgs>
+    type?: boolean | Property$typeArgs<ExtArgs>
   }
   export type PropertyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    type?: boolean | PropertyTypeDefaultArgs<ExtArgs>
+    agent?: boolean | Property$agentArgs<ExtArgs>
+    type?: boolean | Property$typeArgs<ExtArgs>
   }
 
   export type $PropertyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Property"
     objects: {
-      type: Prisma.$PropertyTypePayload<ExtArgs>
+      agent: Prisma.$AgentPayload<ExtArgs> | null
+      type: Prisma.$PropertyTypePayload<ExtArgs> | null
       rentals: Prisma.$RentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -7376,7 +7478,8 @@ export namespace Prisma {
       location: string
       price: Prisma.Decimal
       imageName: string
-      typeId: number
+      typeId: number | null
+      agentId: number | null
     }, ExtArgs["result"]["property"]>
     composites: {}
   }
@@ -7771,7 +7874,8 @@ export namespace Prisma {
    */
   export interface Prisma__PropertyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    type<T extends PropertyTypeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PropertyTypeDefaultArgs<ExtArgs>>): Prisma__PropertyTypeClient<$Result.GetResult<Prisma.$PropertyTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    agent<T extends Property$agentArgs<ExtArgs> = {}>(args?: Subset<T, Property$agentArgs<ExtArgs>>): Prisma__AgentClient<$Result.GetResult<Prisma.$AgentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    type<T extends Property$typeArgs<ExtArgs> = {}>(args?: Subset<T, Property$typeArgs<ExtArgs>>): Prisma__PropertyTypeClient<$Result.GetResult<Prisma.$PropertyTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     rentals<T extends Property$rentalsArgs<ExtArgs> = {}>(args?: Subset<T, Property$rentalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -7808,6 +7912,7 @@ export namespace Prisma {
     readonly price: FieldRef<"Property", 'Decimal'>
     readonly imageName: FieldRef<"Property", 'String'>
     readonly typeId: FieldRef<"Property", 'Int'>
+    readonly agentId: FieldRef<"Property", 'Int'>
   }
     
 
@@ -8199,6 +8304,44 @@ export namespace Prisma {
      * Limit how many Properties to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Property.agent
+   */
+  export type Property$agentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Agent
+     */
+    select?: AgentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Agent
+     */
+    omit?: AgentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AgentInclude<ExtArgs> | null
+    where?: AgentWhereInput
+  }
+
+  /**
+   * Property.type
+   */
+  export type Property$typeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PropertyType
+     */
+    select?: PropertyTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PropertyType
+     */
+    omit?: PropertyTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PropertyTypeInclude<ExtArgs> | null
+    where?: PropertyTypeWhereInput
   }
 
   /**
@@ -10508,7 +10651,8 @@ export namespace Prisma {
     location: 'location',
     price: 'price',
     imageName: 'imageName',
-    typeId: 'typeId'
+    typeId: 'typeId',
+    agentId: 'agentId'
   };
 
   export type PropertyScalarFieldEnum = (typeof PropertyScalarFieldEnum)[keyof typeof PropertyScalarFieldEnum]
@@ -10718,11 +10862,13 @@ export namespace Prisma {
     NOT?: AgentWhereInput | AgentWhereInput[]
     userId?: IntFilter<"Agent"> | number
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    properties?: PropertyListRelationFilter
   }
 
   export type AgentOrderByWithRelationInput = {
     userId?: SortOrder
     user?: UserOrderByWithRelationInput
+    properties?: PropertyOrderByRelationAggregateInput
   }
 
   export type AgentWhereUniqueInput = Prisma.AtLeast<{
@@ -10731,6 +10877,7 @@ export namespace Prisma {
     OR?: AgentWhereInput[]
     NOT?: AgentWhereInput | AgentWhereInput[]
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    properties?: PropertyListRelationFilter
   }, "userId" | "userId">
 
   export type AgentOrderByWithAggregationInput = {
@@ -10800,7 +10947,7 @@ export namespace Prisma {
     startAt?: DateTimeFilter<"Event"> | Date | string
     image?: StringFilter<"Event"> | string
     pubId?: IntFilter<"Event"> | number
-    publisher?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+    publisher?: XOR<AdminNullableScalarRelationFilter, AdminWhereInput> | null
   }
 
   export type EventOrderByWithRelationInput = {
@@ -10825,7 +10972,7 @@ export namespace Prisma {
     startAt?: DateTimeFilter<"Event"> | Date | string
     image?: StringFilter<"Event"> | string
     pubId?: IntFilter<"Event"> | number
-    publisher?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+    publisher?: XOR<AdminNullableScalarRelationFilter, AdminWhereInput> | null
   }, "id">
 
   export type EventOrderByWithAggregationInput = {
@@ -10865,8 +11012,10 @@ export namespace Prisma {
     location?: StringFilter<"Property"> | string
     price?: DecimalFilter<"Property"> | Decimal | DecimalJsLike | number | string
     imageName?: StringFilter<"Property"> | string
-    typeId?: IntFilter<"Property"> | number
-    type?: XOR<PropertyTypeScalarRelationFilter, PropertyTypeWhereInput>
+    typeId?: IntNullableFilter<"Property"> | number | null
+    agentId?: IntNullableFilter<"Property"> | number | null
+    agent?: XOR<AgentNullableScalarRelationFilter, AgentWhereInput> | null
+    type?: XOR<PropertyTypeNullableScalarRelationFilter, PropertyTypeWhereInput> | null
     rentals?: RentListRelationFilter
   }
 
@@ -10876,7 +11025,9 @@ export namespace Prisma {
     location?: SortOrder
     price?: SortOrder
     imageName?: SortOrder
-    typeId?: SortOrder
+    typeId?: SortOrderInput | SortOrder
+    agentId?: SortOrderInput | SortOrder
+    agent?: AgentOrderByWithRelationInput
     type?: PropertyTypeOrderByWithRelationInput
     rentals?: RentOrderByRelationAggregateInput
   }
@@ -10890,8 +11041,10 @@ export namespace Prisma {
     location?: StringFilter<"Property"> | string
     price?: DecimalFilter<"Property"> | Decimal | DecimalJsLike | number | string
     imageName?: StringFilter<"Property"> | string
-    typeId?: IntFilter<"Property"> | number
-    type?: XOR<PropertyTypeScalarRelationFilter, PropertyTypeWhereInput>
+    typeId?: IntNullableFilter<"Property"> | number | null
+    agentId?: IntNullableFilter<"Property"> | number | null
+    agent?: XOR<AgentNullableScalarRelationFilter, AgentWhereInput> | null
+    type?: XOR<PropertyTypeNullableScalarRelationFilter, PropertyTypeWhereInput> | null
     rentals?: RentListRelationFilter
   }, "id">
 
@@ -10901,7 +11054,8 @@ export namespace Prisma {
     location?: SortOrder
     price?: SortOrder
     imageName?: SortOrder
-    typeId?: SortOrder
+    typeId?: SortOrderInput | SortOrder
+    agentId?: SortOrderInput | SortOrder
     _count?: PropertyCountOrderByAggregateInput
     _avg?: PropertyAvgOrderByAggregateInput
     _max?: PropertyMaxOrderByAggregateInput
@@ -10918,7 +11072,8 @@ export namespace Prisma {
     location?: StringWithAggregatesFilter<"Property"> | string
     price?: DecimalWithAggregatesFilter<"Property"> | Decimal | DecimalJsLike | number | string
     imageName?: StringWithAggregatesFilter<"Property"> | string
-    typeId?: IntWithAggregatesFilter<"Property"> | number
+    typeId?: IntNullableWithAggregatesFilter<"Property"> | number | null
+    agentId?: IntNullableWithAggregatesFilter<"Property"> | number | null
   }
 
   export type PropertyTypeWhereInput = {
@@ -11153,18 +11308,22 @@ export namespace Prisma {
 
   export type AgentCreateInput = {
     user: UserCreateNestedOneWithoutAgentInput
+    properties?: PropertyCreateNestedManyWithoutAgentInput
   }
 
   export type AgentUncheckedCreateInput = {
     userId: number
+    properties?: PropertyUncheckedCreateNestedManyWithoutAgentInput
   }
 
   export type AgentUpdateInput = {
     user?: UserUpdateOneRequiredWithoutAgentNestedInput
+    properties?: PropertyUpdateManyWithoutAgentNestedInput
   }
 
   export type AgentUncheckedUpdateInput = {
     userId?: IntFieldUpdateOperationsInput | number
+    properties?: PropertyUncheckedUpdateManyWithoutAgentNestedInput
   }
 
   export type AgentCreateManyInput = {
@@ -11217,7 +11376,7 @@ export namespace Prisma {
     address: string
     startAt: Date | string
     image: string
-    publisher: AdminCreateNestedOneWithoutEventsInput
+    publisher?: AdminCreateNestedOneWithoutEventsInput
   }
 
   export type EventUncheckedCreateInput = {
@@ -11236,7 +11395,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     startAt?: DateTimeFieldUpdateOperationsInput | Date | string
     image?: StringFieldUpdateOperationsInput | string
-    publisher?: AdminUpdateOneRequiredWithoutEventsNestedInput
+    publisher?: AdminUpdateOneWithoutEventsNestedInput
   }
 
   export type EventUncheckedUpdateInput = {
@@ -11282,7 +11441,8 @@ export namespace Prisma {
     location: string
     price: Decimal | DecimalJsLike | number | string
     imageName: string
-    type: PropertyTypeCreateNestedOneWithoutPropertiesInput
+    agent?: AgentCreateNestedOneWithoutPropertiesInput
+    type?: PropertyTypeCreateNestedOneWithoutPropertiesInput
     rentals?: RentCreateNestedManyWithoutPropertyInput
   }
 
@@ -11292,7 +11452,8 @@ export namespace Prisma {
     location: string
     price: Decimal | DecimalJsLike | number | string
     imageName: string
-    typeId: number
+    typeId?: number | null
+    agentId?: number | null
     rentals?: RentUncheckedCreateNestedManyWithoutPropertyInput
   }
 
@@ -11301,7 +11462,8 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     imageName?: StringFieldUpdateOperationsInput | string
-    type?: PropertyTypeUpdateOneRequiredWithoutPropertiesNestedInput
+    agent?: AgentUpdateOneWithoutPropertiesNestedInput
+    type?: PropertyTypeUpdateOneWithoutPropertiesNestedInput
     rentals?: RentUpdateManyWithoutPropertyNestedInput
   }
 
@@ -11311,7 +11473,8 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     imageName?: StringFieldUpdateOperationsInput | string
-    typeId?: IntFieldUpdateOperationsInput | number
+    typeId?: NullableIntFieldUpdateOperationsInput | number | null
+    agentId?: NullableIntFieldUpdateOperationsInput | number | null
     rentals?: RentUncheckedUpdateManyWithoutPropertyNestedInput
   }
 
@@ -11321,7 +11484,8 @@ export namespace Prisma {
     location: string
     price: Decimal | DecimalJsLike | number | string
     imageName: string
-    typeId: number
+    typeId?: number | null
+    agentId?: number | null
   }
 
   export type PropertyUpdateManyMutationInput = {
@@ -11337,7 +11501,8 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     imageName?: StringFieldUpdateOperationsInput | string
-    typeId?: IntFieldUpdateOperationsInput | number
+    typeId?: NullableIntFieldUpdateOperationsInput | number | null
+    agentId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PropertyTypeCreateInput = {
@@ -11615,6 +11780,16 @@ export namespace Prisma {
     userId?: SortOrder
   }
 
+  export type PropertyListRelationFilter = {
+    every?: PropertyWhereInput
+    some?: PropertyWhereInput
+    none?: PropertyWhereInput
+  }
+
+  export type PropertyOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type AgentCountOrderByAggregateInput = {
     userId?: SortOrder
   }
@@ -11663,11 +11838,6 @@ export namespace Prisma {
 
   export type AdminSumOrderByAggregateInput = {
     userId?: SortOrder
-  }
-
-  export type AdminScalarRelationFilter = {
-    is?: AdminWhereInput
-    isNot?: AdminWhereInput
   }
 
   export type EventCountOrderByAggregateInput = {
@@ -11721,9 +11891,25 @@ export namespace Prisma {
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
   }
 
-  export type PropertyTypeScalarRelationFilter = {
-    is?: PropertyTypeWhereInput
-    isNot?: PropertyTypeWhereInput
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type PropertyTypeNullableScalarRelationFilter = {
+    is?: PropertyTypeWhereInput | null
+    isNot?: PropertyTypeWhereInput | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type PropertyCountOrderByAggregateInput = {
@@ -11733,12 +11919,14 @@ export namespace Prisma {
     price?: SortOrder
     imageName?: SortOrder
     typeId?: SortOrder
+    agentId?: SortOrder
   }
 
   export type PropertyAvgOrderByAggregateInput = {
     id?: SortOrder
     price?: SortOrder
     typeId?: SortOrder
+    agentId?: SortOrder
   }
 
   export type PropertyMaxOrderByAggregateInput = {
@@ -11748,6 +11936,7 @@ export namespace Prisma {
     price?: SortOrder
     imageName?: SortOrder
     typeId?: SortOrder
+    agentId?: SortOrder
   }
 
   export type PropertyMinOrderByAggregateInput = {
@@ -11757,12 +11946,14 @@ export namespace Prisma {
     price?: SortOrder
     imageName?: SortOrder
     typeId?: SortOrder
+    agentId?: SortOrder
   }
 
   export type PropertySumOrderByAggregateInput = {
     id?: SortOrder
     price?: SortOrder
     typeId?: SortOrder
+    agentId?: SortOrder
   }
 
   export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
@@ -11781,14 +11972,20 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
-  export type PropertyListRelationFilter = {
-    every?: PropertyWhereInput
-    some?: PropertyWhereInput
-    none?: PropertyWhereInput
-  }
-
-  export type PropertyOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type PropertyTypeCountOrderByAggregateInput = {
@@ -11833,11 +12030,6 @@ export namespace Prisma {
   export type CustomerScalarRelationFilter = {
     is?: CustomerWhereInput
     isNot?: CustomerWhereInput
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
   }
 
   export type RentCountOrderByAggregateInput = {
@@ -12072,12 +12264,54 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type PropertyCreateNestedManyWithoutAgentInput = {
+    create?: XOR<PropertyCreateWithoutAgentInput, PropertyUncheckedCreateWithoutAgentInput> | PropertyCreateWithoutAgentInput[] | PropertyUncheckedCreateWithoutAgentInput[]
+    connectOrCreate?: PropertyCreateOrConnectWithoutAgentInput | PropertyCreateOrConnectWithoutAgentInput[]
+    createMany?: PropertyCreateManyAgentInputEnvelope
+    connect?: PropertyWhereUniqueInput | PropertyWhereUniqueInput[]
+  }
+
+  export type PropertyUncheckedCreateNestedManyWithoutAgentInput = {
+    create?: XOR<PropertyCreateWithoutAgentInput, PropertyUncheckedCreateWithoutAgentInput> | PropertyCreateWithoutAgentInput[] | PropertyUncheckedCreateWithoutAgentInput[]
+    connectOrCreate?: PropertyCreateOrConnectWithoutAgentInput | PropertyCreateOrConnectWithoutAgentInput[]
+    createMany?: PropertyCreateManyAgentInputEnvelope
+    connect?: PropertyWhereUniqueInput | PropertyWhereUniqueInput[]
+  }
+
   export type UserUpdateOneRequiredWithoutAgentNestedInput = {
     create?: XOR<UserCreateWithoutAgentInput, UserUncheckedCreateWithoutAgentInput>
     connectOrCreate?: UserCreateOrConnectWithoutAgentInput
     upsert?: UserUpsertWithoutAgentInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAgentInput, UserUpdateWithoutAgentInput>, UserUncheckedUpdateWithoutAgentInput>
+  }
+
+  export type PropertyUpdateManyWithoutAgentNestedInput = {
+    create?: XOR<PropertyCreateWithoutAgentInput, PropertyUncheckedCreateWithoutAgentInput> | PropertyCreateWithoutAgentInput[] | PropertyUncheckedCreateWithoutAgentInput[]
+    connectOrCreate?: PropertyCreateOrConnectWithoutAgentInput | PropertyCreateOrConnectWithoutAgentInput[]
+    upsert?: PropertyUpsertWithWhereUniqueWithoutAgentInput | PropertyUpsertWithWhereUniqueWithoutAgentInput[]
+    createMany?: PropertyCreateManyAgentInputEnvelope
+    set?: PropertyWhereUniqueInput | PropertyWhereUniqueInput[]
+    disconnect?: PropertyWhereUniqueInput | PropertyWhereUniqueInput[]
+    delete?: PropertyWhereUniqueInput | PropertyWhereUniqueInput[]
+    connect?: PropertyWhereUniqueInput | PropertyWhereUniqueInput[]
+    update?: PropertyUpdateWithWhereUniqueWithoutAgentInput | PropertyUpdateWithWhereUniqueWithoutAgentInput[]
+    updateMany?: PropertyUpdateManyWithWhereWithoutAgentInput | PropertyUpdateManyWithWhereWithoutAgentInput[]
+    deleteMany?: PropertyScalarWhereInput | PropertyScalarWhereInput[]
+  }
+
+  export type PropertyUncheckedUpdateManyWithoutAgentNestedInput = {
+    create?: XOR<PropertyCreateWithoutAgentInput, PropertyUncheckedCreateWithoutAgentInput> | PropertyCreateWithoutAgentInput[] | PropertyUncheckedCreateWithoutAgentInput[]
+    connectOrCreate?: PropertyCreateOrConnectWithoutAgentInput | PropertyCreateOrConnectWithoutAgentInput[]
+    upsert?: PropertyUpsertWithWhereUniqueWithoutAgentInput | PropertyUpsertWithWhereUniqueWithoutAgentInput[]
+    createMany?: PropertyCreateManyAgentInputEnvelope
+    set?: PropertyWhereUniqueInput | PropertyWhereUniqueInput[]
+    disconnect?: PropertyWhereUniqueInput | PropertyWhereUniqueInput[]
+    delete?: PropertyWhereUniqueInput | PropertyWhereUniqueInput[]
+    connect?: PropertyWhereUniqueInput | PropertyWhereUniqueInput[]
+    update?: PropertyUpdateWithWhereUniqueWithoutAgentInput | PropertyUpdateWithWhereUniqueWithoutAgentInput[]
+    updateMany?: PropertyUpdateManyWithWhereWithoutAgentInput | PropertyUpdateManyWithWhereWithoutAgentInput[]
+    deleteMany?: PropertyScalarWhereInput | PropertyScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutAdminInput = {
@@ -12142,12 +12376,20 @@ export namespace Prisma {
     connect?: AdminWhereUniqueInput
   }
 
-  export type AdminUpdateOneRequiredWithoutEventsNestedInput = {
+  export type AdminUpdateOneWithoutEventsNestedInput = {
     create?: XOR<AdminCreateWithoutEventsInput, AdminUncheckedCreateWithoutEventsInput>
     connectOrCreate?: AdminCreateOrConnectWithoutEventsInput
     upsert?: AdminUpsertWithoutEventsInput
+    disconnect?: AdminWhereInput | boolean
+    delete?: AdminWhereInput | boolean
     connect?: AdminWhereUniqueInput
     update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutEventsInput, AdminUpdateWithoutEventsInput>, AdminUncheckedUpdateWithoutEventsInput>
+  }
+
+  export type AgentCreateNestedOneWithoutPropertiesInput = {
+    create?: XOR<AgentCreateWithoutPropertiesInput, AgentUncheckedCreateWithoutPropertiesInput>
+    connectOrCreate?: AgentCreateOrConnectWithoutPropertiesInput
+    connect?: AgentWhereUniqueInput
   }
 
   export type PropertyTypeCreateNestedOneWithoutPropertiesInput = {
@@ -12178,10 +12420,22 @@ export namespace Prisma {
     divide?: Decimal | DecimalJsLike | number | string
   }
 
-  export type PropertyTypeUpdateOneRequiredWithoutPropertiesNestedInput = {
+  export type AgentUpdateOneWithoutPropertiesNestedInput = {
+    create?: XOR<AgentCreateWithoutPropertiesInput, AgentUncheckedCreateWithoutPropertiesInput>
+    connectOrCreate?: AgentCreateOrConnectWithoutPropertiesInput
+    upsert?: AgentUpsertWithoutPropertiesInput
+    disconnect?: AgentWhereInput | boolean
+    delete?: AgentWhereInput | boolean
+    connect?: AgentWhereUniqueInput
+    update?: XOR<XOR<AgentUpdateToOneWithWhereWithoutPropertiesInput, AgentUpdateWithoutPropertiesInput>, AgentUncheckedUpdateWithoutPropertiesInput>
+  }
+
+  export type PropertyTypeUpdateOneWithoutPropertiesNestedInput = {
     create?: XOR<PropertyTypeCreateWithoutPropertiesInput, PropertyTypeUncheckedCreateWithoutPropertiesInput>
     connectOrCreate?: PropertyTypeCreateOrConnectWithoutPropertiesInput
     upsert?: PropertyTypeUpsertWithoutPropertiesInput
+    disconnect?: PropertyTypeWhereInput | boolean
+    delete?: PropertyTypeWhereInput | boolean
     connect?: PropertyTypeWhereUniqueInput
     update?: XOR<XOR<PropertyTypeUpdateToOneWithWhereWithoutPropertiesInput, PropertyTypeUpdateWithoutPropertiesInput>, PropertyTypeUncheckedUpdateWithoutPropertiesInput>
   }
@@ -12198,6 +12452,14 @@ export namespace Prisma {
     update?: RentUpdateWithWhereUniqueWithoutPropertyInput | RentUpdateWithWhereUniqueWithoutPropertyInput[]
     updateMany?: RentUpdateManyWithWhereWithoutPropertyInput | RentUpdateManyWithWhereWithoutPropertyInput[]
     deleteMany?: RentScalarWhereInput | RentScalarWhereInput[]
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type RentUncheckedUpdateManyWithoutPropertyNestedInput = {
@@ -12393,6 +12655,17 @@ export namespace Prisma {
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
   }
 
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     in?: Decimal[] | DecimalJsLike[] | number[] | string[]
@@ -12407,6 +12680,33 @@ export namespace Prisma {
     _sum?: NestedDecimalFilter<$PrismaModel>
     _min?: NestedDecimalFilter<$PrismaModel>
     _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
@@ -12434,17 +12734,6 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type CustomerCreateWithoutUserInput = {
     rented?: RentCreateNestedManyWithoutTenantInput
   }
@@ -12459,11 +12748,11 @@ export namespace Prisma {
   }
 
   export type AgentCreateWithoutUserInput = {
-
+    properties?: PropertyCreateNestedManyWithoutAgentInput
   }
 
   export type AgentUncheckedCreateWithoutUserInput = {
-
+    properties?: PropertyUncheckedCreateNestedManyWithoutAgentInput
   }
 
   export type AgentCreateOrConnectWithoutUserInput = {
@@ -12515,11 +12804,11 @@ export namespace Prisma {
   }
 
   export type AgentUpdateWithoutUserInput = {
-
+    properties?: PropertyUpdateManyWithoutAgentNestedInput
   }
 
   export type AgentUncheckedUpdateWithoutUserInput = {
-
+    properties?: PropertyUncheckedUpdateManyWithoutAgentNestedInput
   }
 
   export type AdminUpsertWithoutUserInput = {
@@ -12692,6 +12981,34 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutAgentInput, UserUncheckedCreateWithoutAgentInput>
   }
 
+  export type PropertyCreateWithoutAgentInput = {
+    name: string
+    location: string
+    price: Decimal | DecimalJsLike | number | string
+    imageName: string
+    type?: PropertyTypeCreateNestedOneWithoutPropertiesInput
+    rentals?: RentCreateNestedManyWithoutPropertyInput
+  }
+
+  export type PropertyUncheckedCreateWithoutAgentInput = {
+    id?: number
+    name: string
+    location: string
+    price: Decimal | DecimalJsLike | number | string
+    imageName: string
+    typeId?: number | null
+    rentals?: RentUncheckedCreateNestedManyWithoutPropertyInput
+  }
+
+  export type PropertyCreateOrConnectWithoutAgentInput = {
+    where: PropertyWhereUniqueInput
+    create: XOR<PropertyCreateWithoutAgentInput, PropertyUncheckedCreateWithoutAgentInput>
+  }
+
+  export type PropertyCreateManyAgentInputEnvelope = {
+    data: PropertyCreateManyAgentInput | PropertyCreateManyAgentInput[]
+  }
+
   export type UserUpsertWithoutAgentInput = {
     update: XOR<UserUpdateWithoutAgentInput, UserUncheckedUpdateWithoutAgentInput>
     create: XOR<UserCreateWithoutAgentInput, UserUncheckedCreateWithoutAgentInput>
@@ -12726,6 +13043,35 @@ export namespace Prisma {
     gender?: StringFieldUpdateOperationsInput | string
     customer?: CustomerUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type PropertyUpsertWithWhereUniqueWithoutAgentInput = {
+    where: PropertyWhereUniqueInput
+    update: XOR<PropertyUpdateWithoutAgentInput, PropertyUncheckedUpdateWithoutAgentInput>
+    create: XOR<PropertyCreateWithoutAgentInput, PropertyUncheckedCreateWithoutAgentInput>
+  }
+
+  export type PropertyUpdateWithWhereUniqueWithoutAgentInput = {
+    where: PropertyWhereUniqueInput
+    data: XOR<PropertyUpdateWithoutAgentInput, PropertyUncheckedUpdateWithoutAgentInput>
+  }
+
+  export type PropertyUpdateManyWithWhereWithoutAgentInput = {
+    where: PropertyScalarWhereInput
+    data: XOR<PropertyUpdateManyMutationInput, PropertyUncheckedUpdateManyWithoutAgentInput>
+  }
+
+  export type PropertyScalarWhereInput = {
+    AND?: PropertyScalarWhereInput | PropertyScalarWhereInput[]
+    OR?: PropertyScalarWhereInput[]
+    NOT?: PropertyScalarWhereInput | PropertyScalarWhereInput[]
+    id?: IntFilter<"Property"> | number
+    name?: StringFilter<"Property"> | string
+    location?: StringFilter<"Property"> | string
+    price?: DecimalFilter<"Property"> | Decimal | DecimalJsLike | number | string
+    imageName?: StringFilter<"Property"> | string
+    typeId?: IntNullableFilter<"Property"> | number | null
+    agentId?: IntNullableFilter<"Property"> | number | null
   }
 
   export type UserCreateWithoutAdminInput = {
@@ -12881,6 +13227,19 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
   }
 
+  export type AgentCreateWithoutPropertiesInput = {
+    user: UserCreateNestedOneWithoutAgentInput
+  }
+
+  export type AgentUncheckedCreateWithoutPropertiesInput = {
+    userId: number
+  }
+
+  export type AgentCreateOrConnectWithoutPropertiesInput = {
+    where: AgentWhereUniqueInput
+    create: XOR<AgentCreateWithoutPropertiesInput, AgentUncheckedCreateWithoutPropertiesInput>
+  }
+
   export type PropertyTypeCreateWithoutPropertiesInput = {
     name: string
   }
@@ -12919,6 +13278,25 @@ export namespace Prisma {
 
   export type RentCreateManyPropertyInputEnvelope = {
     data: RentCreateManyPropertyInput | RentCreateManyPropertyInput[]
+  }
+
+  export type AgentUpsertWithoutPropertiesInput = {
+    update: XOR<AgentUpdateWithoutPropertiesInput, AgentUncheckedUpdateWithoutPropertiesInput>
+    create: XOR<AgentCreateWithoutPropertiesInput, AgentUncheckedCreateWithoutPropertiesInput>
+    where?: AgentWhereInput
+  }
+
+  export type AgentUpdateToOneWithWhereWithoutPropertiesInput = {
+    where?: AgentWhereInput
+    data: XOR<AgentUpdateWithoutPropertiesInput, AgentUncheckedUpdateWithoutPropertiesInput>
+  }
+
+  export type AgentUpdateWithoutPropertiesInput = {
+    user?: UserUpdateOneRequiredWithoutAgentNestedInput
+  }
+
+  export type AgentUncheckedUpdateWithoutPropertiesInput = {
+    userId?: IntFieldUpdateOperationsInput | number
   }
 
   export type PropertyTypeUpsertWithoutPropertiesInput = {
@@ -12962,6 +13340,7 @@ export namespace Prisma {
     location: string
     price: Decimal | DecimalJsLike | number | string
     imageName: string
+    agent?: AgentCreateNestedOneWithoutPropertiesInput
     rentals?: RentCreateNestedManyWithoutPropertyInput
   }
 
@@ -12971,6 +13350,7 @@ export namespace Prisma {
     location: string
     price: Decimal | DecimalJsLike | number | string
     imageName: string
+    agentId?: number | null
     rentals?: RentUncheckedCreateNestedManyWithoutPropertyInput
   }
 
@@ -12999,24 +13379,13 @@ export namespace Prisma {
     data: XOR<PropertyUpdateManyMutationInput, PropertyUncheckedUpdateManyWithoutTypeInput>
   }
 
-  export type PropertyScalarWhereInput = {
-    AND?: PropertyScalarWhereInput | PropertyScalarWhereInput[]
-    OR?: PropertyScalarWhereInput[]
-    NOT?: PropertyScalarWhereInput | PropertyScalarWhereInput[]
-    id?: IntFilter<"Property"> | number
-    name?: StringFilter<"Property"> | string
-    location?: StringFilter<"Property"> | string
-    price?: DecimalFilter<"Property"> | Decimal | DecimalJsLike | number | string
-    imageName?: StringFilter<"Property"> | string
-    typeId?: IntFilter<"Property"> | number
-  }
-
   export type PropertyCreateWithoutRentalsInput = {
     name: string
     location: string
     price: Decimal | DecimalJsLike | number | string
     imageName: string
-    type: PropertyTypeCreateNestedOneWithoutPropertiesInput
+    agent?: AgentCreateNestedOneWithoutPropertiesInput
+    type?: PropertyTypeCreateNestedOneWithoutPropertiesInput
   }
 
   export type PropertyUncheckedCreateWithoutRentalsInput = {
@@ -13025,7 +13394,8 @@ export namespace Prisma {
     location: string
     price: Decimal | DecimalJsLike | number | string
     imageName: string
-    typeId: number
+    typeId?: number | null
+    agentId?: number | null
   }
 
   export type PropertyCreateOrConnectWithoutRentalsInput = {
@@ -13062,7 +13432,8 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     imageName?: StringFieldUpdateOperationsInput | string
-    type?: PropertyTypeUpdateOneRequiredWithoutPropertiesNestedInput
+    agent?: AgentUpdateOneWithoutPropertiesNestedInput
+    type?: PropertyTypeUpdateOneWithoutPropertiesNestedInput
   }
 
   export type PropertyUncheckedUpdateWithoutRentalsInput = {
@@ -13071,7 +13442,8 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     imageName?: StringFieldUpdateOperationsInput | string
-    typeId?: IntFieldUpdateOperationsInput | number
+    typeId?: NullableIntFieldUpdateOperationsInput | number | null
+    agentId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type CustomerUpsertWithoutRentedInput = {
@@ -13126,6 +13498,43 @@ export namespace Prisma {
     endAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     propertyId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PropertyCreateManyAgentInput = {
+    id?: number
+    name: string
+    location: string
+    price: Decimal | DecimalJsLike | number | string
+    imageName: string
+    typeId?: number | null
+  }
+
+  export type PropertyUpdateWithoutAgentInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    imageName?: StringFieldUpdateOperationsInput | string
+    type?: PropertyTypeUpdateOneWithoutPropertiesNestedInput
+    rentals?: RentUpdateManyWithoutPropertyNestedInput
+  }
+
+  export type PropertyUncheckedUpdateWithoutAgentInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    imageName?: StringFieldUpdateOperationsInput | string
+    typeId?: NullableIntFieldUpdateOperationsInput | number | null
+    rentals?: RentUncheckedUpdateManyWithoutPropertyNestedInput
+  }
+
+  export type PropertyUncheckedUpdateManyWithoutAgentInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    imageName?: StringFieldUpdateOperationsInput | string
+    typeId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type EventCreateManyPublisherInput = {
@@ -13204,6 +13613,7 @@ export namespace Prisma {
     location: string
     price: Decimal | DecimalJsLike | number | string
     imageName: string
+    agentId?: number | null
   }
 
   export type PropertyUpdateWithoutTypeInput = {
@@ -13211,6 +13621,7 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     imageName?: StringFieldUpdateOperationsInput | string
+    agent?: AgentUpdateOneWithoutPropertiesNestedInput
     rentals?: RentUpdateManyWithoutPropertyNestedInput
   }
 
@@ -13220,6 +13631,7 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     imageName?: StringFieldUpdateOperationsInput | string
+    agentId?: NullableIntFieldUpdateOperationsInput | number | null
     rentals?: RentUncheckedUpdateManyWithoutPropertyNestedInput
   }
 
@@ -13229,6 +13641,7 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     imageName?: StringFieldUpdateOperationsInput | string
+    agentId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
 

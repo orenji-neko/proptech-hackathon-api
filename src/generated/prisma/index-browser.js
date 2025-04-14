@@ -153,7 +153,8 @@ exports.Prisma.PropertyScalarFieldEnum = {
   location: 'location',
   price: 'price',
   imageName: 'imageName',
-  typeId: 'typeId'
+  typeId: 'typeId',
+  agentId: 'agentId'
 };
 
 exports.Prisma.PropertyTypeScalarFieldEnum = {
