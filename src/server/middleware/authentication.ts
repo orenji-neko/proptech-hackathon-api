@@ -20,8 +20,8 @@ export default new Elysia({ name: "authentication" })
      * @description Enables authorization on the route.
      * @param enabled Enable authorization
      */
-    authorize(enabled: boolean) {
-      if (!enabled) {
+    authorize(role: "anonymous" | "customer" | "agent" | "admin") {
+      if (role === "anonymous") {
         return;
       }
 
@@ -41,12 +41,22 @@ export default new Elysia({ name: "authentication" })
           const decoded = (await jwt.verify(token)) as { id: number };
           const user = await prisma.user.findUnique({
             where: { id: decoded.id },
+            include: {
+              admin: true,
+              agent: true,
+              customer: true
+            }
           });
 
           // no user found
           if (!user) {
             throw error(401, "No user found associated with token");
           }
+
+          if(!user[role]) {
+            throw error(401, "Unauthorized");
+          }
+          
         },
       };
     },
@@ -73,7 +83,7 @@ export default new Elysia({ name: "authentication" })
     });
 
     return {
-      user: user,
+      currentUser: user,
     };
   })
   .as("global");
