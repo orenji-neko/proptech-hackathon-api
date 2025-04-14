@@ -22,9 +22,8 @@ export default new Elysia({ name: "file", prefix: "/files" })
         Bun.write(`public/${file.name}`, file);
       });
 
-      return {
-        message: "success"
-      }
+      const fileNames = files.map((file) => file.name);
+      return fileNames;
     },
     {
       body: t.Object({

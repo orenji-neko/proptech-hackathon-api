@@ -55,6 +55,7 @@ model Event {
   content       String
   address       String
   startAt       DateTime
+  images        String[]    // image file names
 
   pubId         Int
 
@@ -66,6 +67,7 @@ model Property {
   name          String    
   location      String
   price         Decimal
+  images        String[]    // image file names
 
   posterId      Int
 
