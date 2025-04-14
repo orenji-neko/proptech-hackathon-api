@@ -116,4 +116,54 @@ export default new Elysia({ name: "customer", prefix: "/customer" })
           })
         }
       )
+      /**
+       * [POST] /customer/:id/purchase
+       * Create purchase  request.
+       */
+      .post(
+        "/purchase",
+        async ({ error, body, params, prisma, currentUser }) => {
+          const id = parseInt(params.id);
+          const { propertyId } = body;
+
+          // if current user is customer, and the param id is not equal to user id
+          if (currentUser?.customer && currentUser.id !== id) {
+            throw error(401);
+          }
+
+          const property = await prisma.property.findUnique({
+            where: {
+              id: propertyId
+            }
+          });
+          if(!property) throw error(404);
+
+          const purchase = await prisma.purchase.create({
+            data: {
+              price: property.price,
+              customer: {
+                connect: {
+                  userId: id
+                }
+              },
+              property: {
+                connect: {
+                  id: property.id
+                }
+              }
+            },
+            include: {
+              property: true
+            }
+          });
+
+          return purchase;
+        },
+        {
+          authorize: ["customer"],
+          body: t.Object({
+            propertyId: t.Number(),
+          })
+        }
+      )
   );

@@ -180,6 +180,11 @@ export default new Elysia({ name: "user", prefix: "/users" })
         where: {
           email: email,
         },
+        include: {
+          admin: true,
+          agent: true,
+          customer: true,
+        },
       });
       // if no user found
       if (!user) {
@@ -203,6 +208,10 @@ export default new Elysia({ name: "user", prefix: "/users" })
 
       return {
         token: token,
+        user: {
+          id: user.id,
+          role: user.admin ? "admin" : user.agent ? "agent" : "customer",
+        },
       };
     },
     {
@@ -270,8 +279,7 @@ export default new Elysia({ name: "user", prefix: "/users" })
               },
             },
           });
-        }
-        else {
+        } else {
           throw error(400);
         }
 

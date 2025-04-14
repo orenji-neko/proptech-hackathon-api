@@ -31,6 +31,7 @@ model Customer {
   user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   rented        Rent[]
+  purchased     Purchase[]
 }
 
 model Agent {
@@ -66,13 +67,15 @@ model Property {
   name          String    
   location      String
   price         Decimal
-  imageName     String        // image file names
+  imageName     String        
+  status        String        @default("buy")
 
   typeId        Int?
   agentId       Int?
 
   agent         Agent?        @relation(fields: [agentId], references: [userId], onUpdate: Cascade, onDelete: SetNull)
   type          PropertyType? @relation(fields: [typeId], references: [id], onUpdate: Cascade, onDelete: SetNull)
+  purchased     Purchase?
 
   rentals       Rent[]
 }
@@ -95,4 +98,16 @@ model Rent {
 
   property      Property      @relation(fields: [propertyId], references: [id], onUpdate: Cascade, onDelete: NoAction)
   tenant        Customer      @relation(fields: [tenantId], references: [userId], onUpdate: Cascade, onDelete: NoAction)
+}
+
+model Purchase {
+  id            Int           @id @default(autoincrement())
+  price         Decimal       
+  paidAt        DateTime?
+
+  propertyId    Int           @unique
+  customerId    Int
+
+  property      Property      @relation(fields: [propertyId], references: [id], onUpdate: Cascade, onDelete: NoAction)
+  customer      Customer      @relation(fields: [customerId], references: [userId], onUpdate: Cascade, onDelete: NoAction)
 }

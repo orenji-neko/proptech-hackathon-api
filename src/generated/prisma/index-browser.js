@@ -153,6 +153,7 @@ exports.Prisma.PropertyScalarFieldEnum = {
   location: 'location',
   price: 'price',
   imageName: 'imageName',
+  status: 'status',
   typeId: 'typeId',
   agentId: 'agentId'
 };
@@ -170,6 +171,14 @@ exports.Prisma.RentScalarFieldEnum = {
   paidAt: 'paidAt',
   propertyId: 'propertyId',
   tenantId: 'tenantId'
+};
+
+exports.Prisma.PurchaseScalarFieldEnum = {
+  id: 'id',
+  price: 'price',
+  paidAt: 'paidAt',
+  propertyId: 'propertyId',
+  customerId: 'customerId'
 };
 
 exports.Prisma.SortOrder = {
@@ -191,7 +200,8 @@ exports.Prisma.ModelName = {
   Event: 'Event',
   Property: 'Property',
   PropertyType: 'PropertyType',
-  Rent: 'Rent'
+  Rent: 'Rent',
+  Purchase: 'Purchase'
 };
 
 /**

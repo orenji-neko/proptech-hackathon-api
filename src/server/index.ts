@@ -3,7 +3,7 @@ import Elysia from "elysia";
 import { user, file, property, rent, customer } from "./modules";
 import { database, error, logger, authentication } from "./middleware";
 
-export default new Elysia()
+export default new Elysia({ prefix: "/api" })
   // Middlewares
   .use(database)
   .use(logger)

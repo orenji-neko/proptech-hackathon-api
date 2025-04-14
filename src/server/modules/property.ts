@@ -31,7 +31,7 @@ export default new Elysia({ name: "property", prefix: "/properties" })
   .post(
     "/",
     async ({ error, body, prisma, currentUser }) => {
-      const { name, location, price, imageName, typeId } = body;
+      const { name, location, price, imageName, typeId, status } = body;
 
       const property = await prisma.property.create({
         data: {
@@ -39,6 +39,7 @@ export default new Elysia({ name: "property", prefix: "/properties" })
           location: location,
           price: price,
           imageName: imageName,
+          status: status,
           type: {
             connect: {
               id: typeId,
@@ -65,6 +66,7 @@ export default new Elysia({ name: "property", prefix: "/properties" })
         price: t.Number(),
         imageName: t.String(),
         typeId: t.Number(),
+        status: t.String({ examples: ["rent", "buy"] })
       }),
     }
   )
@@ -75,7 +77,7 @@ export default new Elysia({ name: "property", prefix: "/properties" })
     "/:id",
     async ({ params, body, prisma }) => {
       const id = parseInt(params.id);
-      const { name, location, price, imageName, typeId } = body;
+      const { name, location, price, imageName, typeId, status } = body;
 
       const user = await prisma.property.update({
         where: {
@@ -86,6 +88,7 @@ export default new Elysia({ name: "property", prefix: "/properties" })
           location: location,
           price: price,
           imageName: imageName,
+          status: status,
           type: {
             update: {
               id: typeId,
@@ -104,6 +107,7 @@ export default new Elysia({ name: "property", prefix: "/properties" })
         price: t.Number(),
         imageName: t.String(),
         typeId: t.Number(),
+        status: t.String({ examples: ["rent", "buy"] })
       }),
     }
   )
