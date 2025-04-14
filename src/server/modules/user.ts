@@ -218,7 +218,7 @@ export default new Elysia({ name: "user", prefix: "/users" })
         const user = await prisma.user.create({
           data: {
             email: email,
-            password: password,
+            password: hashedPassword,
             lname: lname,
             fname: fname,
             bday: bday,

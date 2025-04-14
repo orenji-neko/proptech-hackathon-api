@@ -28,7 +28,7 @@ model User {
 model Customer {
   userId Int @id @unique
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   rented Rent[]
 }
@@ -36,13 +36,13 @@ model Customer {
 model Agent {
   userId Int @id @unique
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Admin {
   userId Int @id @unique
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   events Event[]
 }
@@ -84,7 +84,7 @@ model Rent {
   id       Int       @id @default(autoincrement())
   price    Decimal
   rentedAt DateTime  @default(now())
-  endAt    DateTime
+  endAt    DateTime?
   paidAt   DateTime?
 
   propertyId Int

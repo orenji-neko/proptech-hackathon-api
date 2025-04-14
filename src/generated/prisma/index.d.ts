@@ -9500,7 +9500,7 @@ export namespace Prisma {
     id: number
     price: Decimal
     rentedAt: Date
-    endAt: Date
+    endAt: Date | null
     paidAt: Date | null
     propertyId: number
     tenantId: number
@@ -9595,7 +9595,7 @@ export namespace Prisma {
       id: number
       price: Prisma.Decimal
       rentedAt: Date
-      endAt: Date
+      endAt: Date | null
       paidAt: Date | null
       propertyId: number
       tenantId: number
@@ -10970,7 +10970,7 @@ export namespace Prisma {
     id?: IntFilter<"Rent"> | number
     price?: DecimalFilter<"Rent"> | Decimal | DecimalJsLike | number | string
     rentedAt?: DateTimeFilter<"Rent"> | Date | string
-    endAt?: DateTimeFilter<"Rent"> | Date | string
+    endAt?: DateTimeNullableFilter<"Rent"> | Date | string | null
     paidAt?: DateTimeNullableFilter<"Rent"> | Date | string | null
     propertyId?: IntFilter<"Rent"> | number
     tenantId?: IntFilter<"Rent"> | number
@@ -10982,7 +10982,7 @@ export namespace Prisma {
     id?: SortOrder
     price?: SortOrder
     rentedAt?: SortOrder
-    endAt?: SortOrder
+    endAt?: SortOrderInput | SortOrder
     paidAt?: SortOrderInput | SortOrder
     propertyId?: SortOrder
     tenantId?: SortOrder
@@ -10997,7 +10997,7 @@ export namespace Prisma {
     NOT?: RentWhereInput | RentWhereInput[]
     price?: DecimalFilter<"Rent"> | Decimal | DecimalJsLike | number | string
     rentedAt?: DateTimeFilter<"Rent"> | Date | string
-    endAt?: DateTimeFilter<"Rent"> | Date | string
+    endAt?: DateTimeNullableFilter<"Rent"> | Date | string | null
     paidAt?: DateTimeNullableFilter<"Rent"> | Date | string | null
     propertyId?: IntFilter<"Rent"> | number
     tenantId?: IntFilter<"Rent"> | number
@@ -11009,7 +11009,7 @@ export namespace Prisma {
     id?: SortOrder
     price?: SortOrder
     rentedAt?: SortOrder
-    endAt?: SortOrder
+    endAt?: SortOrderInput | SortOrder
     paidAt?: SortOrderInput | SortOrder
     propertyId?: SortOrder
     tenantId?: SortOrder
@@ -11027,7 +11027,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Rent"> | number
     price?: DecimalWithAggregatesFilter<"Rent"> | Decimal | DecimalJsLike | number | string
     rentedAt?: DateTimeWithAggregatesFilter<"Rent"> | Date | string
-    endAt?: DateTimeWithAggregatesFilter<"Rent"> | Date | string
+    endAt?: DateTimeNullableWithAggregatesFilter<"Rent"> | Date | string | null
     paidAt?: DateTimeNullableWithAggregatesFilter<"Rent"> | Date | string | null
     propertyId?: IntWithAggregatesFilter<"Rent"> | number
     tenantId?: IntWithAggregatesFilter<"Rent"> | number
@@ -11379,7 +11379,7 @@ export namespace Prisma {
   export type RentCreateInput = {
     price: Decimal | DecimalJsLike | number | string
     rentedAt?: Date | string
-    endAt: Date | string
+    endAt?: Date | string | null
     paidAt?: Date | string | null
     property: PropertyCreateNestedOneWithoutRentalsInput
     tenant: CustomerCreateNestedOneWithoutRentedInput
@@ -11389,7 +11389,7 @@ export namespace Prisma {
     id?: number
     price: Decimal | DecimalJsLike | number | string
     rentedAt?: Date | string
-    endAt: Date | string
+    endAt?: Date | string | null
     paidAt?: Date | string | null
     propertyId: number
     tenantId: number
@@ -11398,7 +11398,7 @@ export namespace Prisma {
   export type RentUpdateInput = {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rentedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    endAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     property?: PropertyUpdateOneRequiredWithoutRentalsNestedInput
     tenant?: CustomerUpdateOneRequiredWithoutRentedNestedInput
@@ -11408,7 +11408,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rentedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    endAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     propertyId?: IntFieldUpdateOperationsInput | number
     tenantId?: IntFieldUpdateOperationsInput | number
@@ -11418,7 +11418,7 @@ export namespace Prisma {
     id?: number
     price: Decimal | DecimalJsLike | number | string
     rentedAt?: Date | string
-    endAt: Date | string
+    endAt?: Date | string | null
     paidAt?: Date | string | null
     propertyId: number
     tenantId: number
@@ -11427,7 +11427,7 @@ export namespace Prisma {
   export type RentUpdateManyMutationInput = {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rentedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    endAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
@@ -11435,7 +11435,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rentedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    endAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     propertyId?: IntFieldUpdateOperationsInput | number
     tenantId?: IntFieldUpdateOperationsInput | number
@@ -12574,7 +12574,7 @@ export namespace Prisma {
   export type RentCreateWithoutTenantInput = {
     price: Decimal | DecimalJsLike | number | string
     rentedAt?: Date | string
-    endAt: Date | string
+    endAt?: Date | string | null
     paidAt?: Date | string | null
     property: PropertyCreateNestedOneWithoutRentalsInput
   }
@@ -12583,7 +12583,7 @@ export namespace Prisma {
     id?: number
     price: Decimal | DecimalJsLike | number | string
     rentedAt?: Date | string
-    endAt: Date | string
+    endAt?: Date | string | null
     paidAt?: Date | string | null
     propertyId: number
   }
@@ -12656,7 +12656,7 @@ export namespace Prisma {
     id?: IntFilter<"Rent"> | number
     price?: DecimalFilter<"Rent"> | Decimal | DecimalJsLike | number | string
     rentedAt?: DateTimeFilter<"Rent"> | Date | string
-    endAt?: DateTimeFilter<"Rent"> | Date | string
+    endAt?: DateTimeNullableFilter<"Rent"> | Date | string | null
     paidAt?: DateTimeNullableFilter<"Rent"> | Date | string | null
     propertyId?: IntFilter<"Rent"> | number
     tenantId?: IntFilter<"Rent"> | number
@@ -12898,7 +12898,7 @@ export namespace Prisma {
   export type RentCreateWithoutPropertyInput = {
     price: Decimal | DecimalJsLike | number | string
     rentedAt?: Date | string
-    endAt: Date | string
+    endAt?: Date | string | null
     paidAt?: Date | string | null
     tenant: CustomerCreateNestedOneWithoutRentedInput
   }
@@ -12907,7 +12907,7 @@ export namespace Prisma {
     id?: number
     price: Decimal | DecimalJsLike | number | string
     rentedAt?: Date | string
-    endAt: Date | string
+    endAt?: Date | string | null
     paidAt?: Date | string | null
     tenantId: number
   }
@@ -13097,7 +13097,7 @@ export namespace Prisma {
     id?: number
     price: Decimal | DecimalJsLike | number | string
     rentedAt?: Date | string
-    endAt: Date | string
+    endAt?: Date | string | null
     paidAt?: Date | string | null
     propertyId: number
   }
@@ -13105,7 +13105,7 @@ export namespace Prisma {
   export type RentUpdateWithoutTenantInput = {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rentedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    endAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     property?: PropertyUpdateOneRequiredWithoutRentalsNestedInput
   }
@@ -13114,7 +13114,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rentedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    endAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     propertyId?: IntFieldUpdateOperationsInput | number
   }
@@ -13123,7 +13123,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rentedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    endAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     propertyId?: IntFieldUpdateOperationsInput | number
   }
@@ -13167,7 +13167,7 @@ export namespace Prisma {
     id?: number
     price: Decimal | DecimalJsLike | number | string
     rentedAt?: Date | string
-    endAt: Date | string
+    endAt?: Date | string | null
     paidAt?: Date | string | null
     tenantId: number
   }
@@ -13175,7 +13175,7 @@ export namespace Prisma {
   export type RentUpdateWithoutPropertyInput = {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rentedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    endAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenant?: CustomerUpdateOneRequiredWithoutRentedNestedInput
   }
@@ -13184,7 +13184,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rentedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    endAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: IntFieldUpdateOperationsInput | number
   }
@@ -13193,7 +13193,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rentedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    endAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: IntFieldUpdateOperationsInput | number
   }
