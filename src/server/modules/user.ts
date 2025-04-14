@@ -187,7 +187,11 @@ export default new Elysia({ name: "user", prefix: "/users" })
       }
 
       // password checking
-      const match = await Bun.password.verify(password, user.password, "bcrypt");
+      const match = await Bun.password.verify(
+        password,
+        user.password,
+        "bcrypt"
+      );
       if (!match) {
         throw error(400);
       }
@@ -215,7 +219,8 @@ export default new Elysia({ name: "user", prefix: "/users" })
   .post(
     "/register",
     async ({ error, body, prisma }) => {
-      const { email, password, lname, fname, bday, address, gender } = body;
+      const { email, password, lname, fname, bday, address, gender, role } =
+        body;
 
       const hashedPassword = await Bun.password.hash(password, "bcrypt");
 
@@ -243,16 +248,33 @@ export default new Elysia({ name: "user", prefix: "/users" })
           },
         });
 
-        // create customer profile
-        await prisma.customer.create({
-          data: {
-            user: {
-              connect: {
-                id: user.id,
+        if (role === "agent") {
+          // create customer profile
+          await prisma.agent.create({
+            data: {
+              user: {
+                connect: {
+                  id: user.id,
+                },
               },
             },
-          },
-        });
+          });
+        } else if (role === "customer") {
+          // create customer profile
+          await prisma.customer.create({
+            data: {
+              user: {
+                connect: {
+                  id: user.id,
+                },
+              },
+            },
+          });
+        }
+        else {
+          throw error(400);
+        }
+
         return user;
       } catch (err) {
         throw error(400);
@@ -266,7 +288,8 @@ export default new Elysia({ name: "user", prefix: "/users" })
         fname: t.String(),
         bday: t.Date(),
         address: t.String(),
-        gender: t.String(),
+        gender: t.String({ examples: ["male", "female"] }),
+        role: t.String({ examples: ["agent", "customer"] }),
       }),
     }
   );
