@@ -116,8 +116,50 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
-  username: 'username',
-  password: 'password'
+  email: 'email',
+  password: 'password',
+  lname: 'lname',
+  fname: 'fname',
+  bday: 'bday',
+  address: 'address',
+  gender: 'gender'
+};
+
+exports.Prisma.CustomerScalarFieldEnum = {
+  userId: 'userId'
+};
+
+exports.Prisma.AgentScalarFieldEnum = {
+  userId: 'userId'
+};
+
+exports.Prisma.AdminScalarFieldEnum = {
+  userId: 'userId'
+};
+
+exports.Prisma.EventScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  pubId: 'pubId'
+};
+
+exports.Prisma.PropertyScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  location: 'location',
+  price: 'price',
+  posterId: 'posterId'
+};
+
+exports.Prisma.RentScalarFieldEnum = {
+  id: 'id',
+  price: 'price',
+  rentedAt: 'rentedAt',
+  endAt: 'endAt',
+  paidAt: 'paidAt',
+  propertyId: 'propertyId',
+  tenantId: 'tenantId'
 };
 
 exports.Prisma.SortOrder = {
@@ -125,9 +167,20 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Customer: 'Customer',
+  Agent: 'Agent',
+  Admin: 'Admin',
+  Event: 'Event',
+  Property: 'Property',
+  Rent: 'Rent'
 };
 
 /**

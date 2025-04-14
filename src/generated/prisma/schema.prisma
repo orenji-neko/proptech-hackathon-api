@@ -11,8 +11,77 @@ datasource db {
 }
 
 model User {
-  id Int @id @default(autoincrement())
-
-  username String
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
   password String
+  lname    String
+  fname    String
+  bday     DateTime
+  address  String
+  gender   String
+
+  customer Customer?
+  agent    Agent?
+  admin    Admin?
+}
+
+model Customer {
+  userId Int @id @unique
+
+  user User @relation(fields: [userId], references: [id])
+
+  rented Rent[]
+}
+
+model Agent {
+  userId Int @id @unique
+
+  user User @relation(fields: [userId], references: [id])
+
+  properties Property[]
+}
+
+model Admin {
+  userId Int @id @unique
+
+  user User @relation(fields: [userId], references: [id])
+
+  events Event[]
+}
+
+model Event {
+  id      Int    @id @default(autoincrement())
+  title   String
+  content String
+
+  pubId Int
+
+  publisher Admin @relation(fields: [pubId], references: [userId])
+}
+
+model Property {
+  id       Int     @id @default(autoincrement())
+  name     String
+  location String
+  price    Decimal
+
+  posterId Int
+
+  poster Agent @relation(fields: [posterId], references: [userId])
+
+  rentals Rent[]
+}
+
+model Rent {
+  id       Int       @id @default(autoincrement())
+  price    Decimal
+  rentedAt DateTime  @default(now())
+  endAt    DateTime
+  paidAt   DateTime?
+
+  propertyId Int
+  tenantId   Int
+
+  property Property @relation(fields: [propertyId], references: [id])
+  tenant   Customer @relation(fields: [tenantId], references: [userId])
 }
