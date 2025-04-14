@@ -1,0 +1,35 @@
+// Prisma Schema file
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  username  String
+  password  String
+  roleId    Int
+  
+  // Relations
+  role      Role      @relation(fields: [roleId], references: [id])
+}
+
+model Role {
+  id        Int       @id @default(autoincrement())
+  name      String
+  
+  // Relations
+  users     User[]
+}
+
+model Events {
+  id        Int       @id @default(autoincrement())
+  title     String 
+  body      String
+}

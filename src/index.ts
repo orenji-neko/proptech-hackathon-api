@@ -1,7 +1,9 @@
 import { Elysia } from "elysia";
+import server from "./server";
+import logger from "./server/middleware/logger";
 
-const app = new Elysia().get("/", () => "Hello Elysia").listen(3000);
-
-console.log(
-  `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
-);
+const app = new Elysia()
+  .use(server)
+  .listen(Bun.env.PORT || 3000, ({ hostname, port }) => {
+    console.log(`🦊 Server is running at ${hostname}:${port}`);
+  });

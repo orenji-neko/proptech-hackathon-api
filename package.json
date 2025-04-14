@@ -2,11 +2,16 @@
   "name": "bun-starter",
   "version": "1.0.50",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
-    "elysia": "latest"
+    "@elysiajs/jwt": "^1.2.0",
+    "@prisma/client": "6.6.0",
+    "@types/pino": "^7.0.5",
+    "elysia": "latest",
+    "pino": "^9.6.0",
+    "pino-pretty": "^13.0.0",
+    "prisma": "^6.6.0"
   },
   "devDependencies": {
     "bun-types": "latest"
