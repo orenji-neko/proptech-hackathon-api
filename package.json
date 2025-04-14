@@ -2,7 +2,8 @@
   "name": "bun-starter",
   "version": "1.0.50",
   "scripts": {
-    "dev": "bun run --watch src/index.ts"
+    "dev": "bun run --watch src/index.ts",
+    "seed": "bun run src/seed.ts"
   },
   "dependencies": {
     "@elysiajs/jwt": "^1.2.0",

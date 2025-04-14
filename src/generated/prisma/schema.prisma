@@ -37,8 +37,6 @@ model Agent {
   userId Int @id @unique
 
   user User @relation(fields: [userId], references: [id])
-
-  properties Property[]
 }
 
 model Admin {
@@ -50,9 +48,12 @@ model Admin {
 }
 
 model Event {
-  id      Int    @id @default(autoincrement())
+  id      Int      @id @default(autoincrement())
   title   String
   content String
+  address String
+  startAt DateTime
+  image   String // image file names
 
   pubId Int
 
@@ -60,16 +61,23 @@ model Event {
 }
 
 model Property {
-  id       Int     @id @default(autoincrement())
-  name     String
-  location String
-  price    Decimal
+  id        Int     @id @default(autoincrement())
+  name      String
+  location  String
+  price     Decimal
+  imageName String // image file names
 
-  posterId Int
+  typeId Int
 
-  poster Agent @relation(fields: [posterId], references: [userId])
+  type PropertyType @relation(fields: [typeId], references: [id])
 
   rentals Rent[]
+}
+
+model PropertyType {
+  id         Int        @id @default(autoincrement())
+  name       String
+  properties Property[]
 }
 
 model Rent {

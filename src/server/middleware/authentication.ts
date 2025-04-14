@@ -86,6 +86,11 @@ export default new Elysia({ name: "authentication" })
     const decoded = (await jwt.verify(token)) as { id: number };
     const user = await prisma.user.findUnique({
       where: { id: decoded.id },
+      include: {
+        admin: true,
+        agent: true,
+        customer: true
+      }
     });
 
     return {

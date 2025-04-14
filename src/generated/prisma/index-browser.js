@@ -141,6 +141,9 @@ exports.Prisma.EventScalarFieldEnum = {
   id: 'id',
   title: 'title',
   content: 'content',
+  address: 'address',
+  startAt: 'startAt',
+  image: 'image',
   pubId: 'pubId'
 };
 
@@ -149,7 +152,13 @@ exports.Prisma.PropertyScalarFieldEnum = {
   name: 'name',
   location: 'location',
   price: 'price',
-  posterId: 'posterId'
+  imageName: 'imageName',
+  typeId: 'typeId'
+};
+
+exports.Prisma.PropertyTypeScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
 };
 
 exports.Prisma.RentScalarFieldEnum = {
@@ -180,6 +189,7 @@ exports.Prisma.ModelName = {
   Admin: 'Admin',
   Event: 'Event',
   Property: 'Property',
+  PropertyType: 'PropertyType',
   Rent: 'Rent'
 };
 
