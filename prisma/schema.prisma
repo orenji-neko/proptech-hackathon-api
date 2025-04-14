@@ -53,6 +53,8 @@ model Event {
   id            Int         @id @default(autoincrement())
   title         String 
   content       String
+  address       String
+  startAt       DateTime
 
   pubId         Int
 

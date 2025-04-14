@@ -20,8 +20,8 @@ export default new Elysia({ name: "authentication" })
      * @description Enables authorization on the route.
      * @param enabled Enable authorization
      */
-    authorize(role: "anonymous" | "customer" | "agent" | "admin") {
-      if (role === "anonymous") {
+    authorize(roles: ("customer" | "agent" | "admin")[] | null) {
+      if (!roles) {
         return;
       }
 
@@ -53,9 +53,15 @@ export default new Elysia({ name: "authentication" })
             throw error(401, "No user found associated with token");
           }
 
-          if(!user[role]) {
-            throw error(401, "Unauthorized");
-          }
+          let success = false;
+          // check roles
+          roles.forEach((role) => {
+            if(user[role]) {
+              success = true;
+            }
+          });
+
+          if(!success) throw error(401, "Unauthorized");
           
         },
       };

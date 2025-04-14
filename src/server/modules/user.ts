@@ -16,7 +16,7 @@ export default new Elysia({ name: "user", prefix: "/users" })
       return await prisma.user.findMany();
     },
     {
-      authorize: "admin",
+      authorize: ["admin"],
     }
   )
   /**
@@ -87,7 +87,7 @@ export default new Elysia({ name: "user", prefix: "/users" })
       return user;
     },
     {
-      authorize: "admin",
+      authorize: ["admin"],
       body: t.Object({
         email: t.String(),
         password: t.String({ minLength: 8 }),
@@ -129,7 +129,7 @@ export default new Elysia({ name: "user", prefix: "/users" })
       return user;
     },
     {
-      authorize: "admin",
+      authorize: ["admin"],
       body: t.Object({
         email: t.String(),
         password: t.String({ minLength: 8 }),
@@ -163,7 +163,7 @@ export default new Elysia({ name: "user", prefix: "/users" })
       return user;
     },
     {
-      authorize: "admin",
+      authorize: ["admin"],
     }
   )
   /**
@@ -196,7 +196,6 @@ export default new Elysia({ name: "user", prefix: "/users" })
       };
     },
     {
-      authorize: "anonymous",
       body: t.Object({
         email: t.String(),
         password: t.String({ minLength: 8 }),
@@ -254,7 +253,6 @@ export default new Elysia({ name: "user", prefix: "/users" })
       }
     },
     {
-      authorize: "anonymous",
       body: t.Object({
         email: t.String(),
         password: t.String(),
