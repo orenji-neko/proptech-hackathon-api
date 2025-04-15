@@ -154,6 +154,9 @@ exports.Prisma.PropertyScalarFieldEnum = {
   price: 'price',
   imageName: 'imageName',
   status: 'status',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  description: 'description',
   typeId: 'typeId',
   agentId: 'agentId'
 };
@@ -165,7 +168,6 @@ exports.Prisma.PropertyTypeScalarFieldEnum = {
 
 exports.Prisma.RentScalarFieldEnum = {
   id: 'id',
-  price: 'price',
   rentedAt: 'rentedAt',
   endAt: 'endAt',
   paidAt: 'paidAt',
@@ -175,7 +177,6 @@ exports.Prisma.RentScalarFieldEnum = {
 
 exports.Prisma.PurchaseScalarFieldEnum = {
   id: 'id',
-  price: 'price',
   paidAt: 'paidAt',
   propertyId: 'propertyId',
   customerId: 'customerId'

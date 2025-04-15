@@ -1,6 +1,6 @@
 import Elysia from "elysia";
 
-import { user, file, property, rent, customer } from "./modules";
+import { user, file, property, rent, customer, history } from "./modules";
 import { database, error, logger, authentication } from "./middleware";
 
 export default new Elysia({ prefix: "/api" })
@@ -14,4 +14,5 @@ export default new Elysia({ prefix: "/api" })
   .use(user)
   .use(property)
   .use(rent)
-  .use(customer);
+  .use(customer)
+  .use(history);

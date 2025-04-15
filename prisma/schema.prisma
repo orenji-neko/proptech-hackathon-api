@@ -69,15 +69,18 @@ model Property {
   price         Decimal
   imageName     String        
   status        String        @default("buy")
+  latitude      String?
+  longitude     String?
+  description   String        @default("A property")
 
   typeId        Int?
   agentId       Int?
 
   agent         Agent?        @relation(fields: [agentId], references: [userId], onUpdate: Cascade, onDelete: SetNull)
   type          PropertyType? @relation(fields: [typeId], references: [id], onUpdate: Cascade, onDelete: SetNull)
+  
   purchased     Purchase?
-
-  rentals       Rent[]
+  rental        Rent?
 }
 
 model PropertyType {
@@ -87,13 +90,12 @@ model PropertyType {
 }
 
 model Rent {
-  id            Int           @id @default(autoincrement())     
-  price         Decimal
+  id            Int           @id @default(autoincrement())  
   rentedAt      DateTime      @default(now())
   endAt         DateTime?
   paidAt        DateTime?
 
-  propertyId    Int
+  propertyId    Int           @unique
   tenantId      Int
 
   property      Property      @relation(fields: [propertyId], references: [id], onUpdate: Cascade, onDelete: NoAction)
@@ -102,7 +104,6 @@ model Rent {
 
 model Purchase {
   id            Int           @id @default(autoincrement())
-  price         Decimal       
   paidAt        DateTime?
 
   propertyId    Int           @unique

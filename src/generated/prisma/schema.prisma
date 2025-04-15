@@ -63,21 +63,24 @@ model Event {
 }
 
 model Property {
-  id        Int     @id @default(autoincrement())
-  name      String
-  location  String
-  price     Decimal
-  imageName String // image file names
-  status    String  @default("buy")
+  id          Int     @id @default(autoincrement())
+  name        String
+  location    String
+  price       Decimal
+  imageName   String
+  status      String  @default("buy")
+  latitude    String?
+  longitude   String?
+  description String  @default("A property")
 
   typeId  Int?
   agentId Int?
 
-  agent     Agent?        @relation(fields: [agentId], references: [userId], onUpdate: Cascade, onDelete: SetNull)
-  type      PropertyType? @relation(fields: [typeId], references: [id], onUpdate: Cascade, onDelete: SetNull)
-  purchased Purchase?
+  agent Agent?        @relation(fields: [agentId], references: [userId], onUpdate: Cascade, onDelete: SetNull)
+  type  PropertyType? @relation(fields: [typeId], references: [id], onUpdate: Cascade, onDelete: SetNull)
 
-  rentals Rent[]
+  purchased Purchase?
+  rental    Rent?
 }
 
 model PropertyType {
@@ -88,12 +91,11 @@ model PropertyType {
 
 model Rent {
   id       Int       @id @default(autoincrement())
-  price    Decimal
   rentedAt DateTime  @default(now())
   endAt    DateTime?
   paidAt   DateTime?
 
-  propertyId Int
+  propertyId Int @unique
   tenantId   Int
 
   property Property @relation(fields: [propertyId], references: [id], onUpdate: Cascade, onDelete: NoAction)
@@ -102,7 +104,6 @@ model Rent {
 
 model Purchase {
   id     Int       @id @default(autoincrement())
-  price  Decimal
   paidAt DateTime?
 
   propertyId Int @unique
